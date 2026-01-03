@@ -69,6 +69,7 @@ npm run back # Start API server
 Create a .env file and add:
 
 MONGO_URI=your_mongodb_connection_string
+PORT=your_api_port_number
 
 ## 📌 Future Improvements
 
