@@ -37,7 +37,7 @@ Bitiful Market is a full-stack e-commerce web application built using the MERN s
 ## 📁 Project Structure (Backend)
 
 ```pgsql
-server/
+backend/
 │── config/
 │   └── db.js
 │── models/
@@ -46,7 +46,6 @@ server/
 │   └── product.routes.js
 │── controllers/
 │   └── product.controller.js
-│── app.js
 │── server.js
 ```
 
