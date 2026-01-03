@@ -5,12 +5,13 @@ import {
     getProducts, 
     updateProduct 
 } from "../controllers/product.controller.js"
+import validateObjectId from "../middlewares/validateObjectId.js"
 
 const router = express.Router()
 
 router.post("/", createProduct)
 router.get("/", getProducts)
-router.put("/:id", updateProduct)
-router.delete("/:id", deleteProduct)
+router.put("/:id", validateObjectId, updateProduct)
+router.delete("/:id", validateObjectId, deleteProduct)
 
 export default router
