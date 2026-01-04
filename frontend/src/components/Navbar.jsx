@@ -2,7 +2,7 @@
 
 import { Container, Text, Flex, HStack, Button, Theme } from '@chakra-ui/react'
 import React from 'react'
-import { BiPlus } from 'react-icons/bi'
+import { BiPlus, BiShoppingBag } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
 import { useColorMode, ColorModeIcon } from './ui/color-mode'
 
@@ -20,14 +20,19 @@ const Navbar = () => {
             }}
         >
             <Text
-                fontSize={{ base: "22", sm: "28"}}
-                fontWeight={"bold"}
-                textTransform={"uppercase"}
-                textAlign={"center"}
-                bgGradient={"linear(to-r, cyan.400, blue.500)"}
-                // bgClip={"text"}
-            >
-                <Link to="/">Bitiful Market 🛒</Link>
+                fontSize={{ base: "22px", sm: "28px" }}
+                fontWeight="bold"
+                textTransform="uppercase"
+                textAlign="center"
+                bgGradient="linear(to-r, cyan.400, blue.500)"
+                sx={{
+                    backgroundImage: "linear-gradient(to right, #22d3ee, #3b82f6)",
+                    WebkitBackgroundClip: "text",
+                    color: "transparent",
+                    backgroundClip: "text",
+                }}
+                >
+                Bitiful Market 🛒
             </Text>
             <HStack
                 spaceX={2}
