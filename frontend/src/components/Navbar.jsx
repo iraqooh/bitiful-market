@@ -1,8 +1,8 @@
 "use client"
 
-import { Container, Text, Flex, HStack, Button, Theme } from '@chakra-ui/react'
+import { Container, Text, Flex, HStack, Button } from '@chakra-ui/react'
 import React from 'react'
-import { BiPlus, BiShoppingBag } from 'react-icons/bi'
+import { BiPlus } from 'react-icons/bi'
 import { Link } from 'react-router-dom'
 import { useColorMode, ColorModeIcon } from './ui/color-mode'
 
@@ -32,7 +32,7 @@ const Navbar = () => {
                     backgroundClip: "text",
                 }}
                 >
-                Bitiful Market 🛒
+                <Link to="/">Bitiful Market 🛒</Link>
             </Text>
             <HStack
                 spaceX={2}

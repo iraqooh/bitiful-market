@@ -25,5 +25,54 @@ export const useProductStore = create((set) => ({
         } catch (error) {
             return { success: false, message: `Failed to create product: ${error}` }
         }
+    },
+    fetchProducts: async () => {
+        try {
+            const res = await fetch("/v1/products")
+            const data = await res.json()
+            if (!data.success) {
+                return { success: false, message: data.message }
+            }
+            set({ products: data.data })
+            return data
+        } catch (error) {
+            console.error("Failed to fetch products:", error)
+        }
+    },
+    deleteProduct: async (id) => {
+        try {
+            const res = await fetch(`/v1/products/${id}`, { method: "DELETE" })
+            const data = await res.json()
+            if (data.success) {
+                set((state) => ({ 
+                    products: state.products.filter((product) => product._id !== id) 
+                }))
+            }
+            return data
+        } catch (error) {
+            return { success: false, message: `Failed to delete product: ${error.message}` }
+        }
+    },
+    updateProduct: async (id, updatedFields) => {
+        try {
+            const res = await fetch(`/v1/products/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(updatedFields)
+            })
+            const data = await res.json()
+            if (data.success) {
+                set((state) => ({
+                    products: state.products.map((product) => 
+                        product._id === id ? data.data : product
+                    )
+                }))
+            }
+            return data
+        } catch (error) {
+            return { success: false, message: `Failed to update product: ${error.message}` }
+        }
     }
 }));
