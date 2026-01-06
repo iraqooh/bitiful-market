@@ -2,7 +2,6 @@ import express from "express"
 import dotenv from "dotenv"
 import path from "path"
 import cors from "cors"
-import { fileURLToPath } from "url"
 import { connectDB } from "./config/db.js"
 import productRouter from "./routes/product.routes.js"
 
@@ -14,7 +13,7 @@ app.use(cors());
 app.use("/api/v1/products", productRouter)
 
 const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+const __dirname = path.resolve()
 
 if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "/frontend/dist")))
