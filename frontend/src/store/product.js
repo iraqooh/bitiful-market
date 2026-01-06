@@ -1,5 +1,7 @@
 import { create } from "zustand";
 
+const API_BASE = `http://localhost:${import.meta.env.PORT || 5000}`;
+
 export const useProductStore = create((set) => ({
     products: [],
     setProducts: (products) => set({ products }),
@@ -12,7 +14,7 @@ export const useProductStore = create((set) => ({
             return { success: false, message: "All fields are required." };
         }
         try {
-            const res = await fetch("/v1/products", {
+            const res = await fetch(`${API_BASE}/api/v1/products`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -33,7 +35,7 @@ export const useProductStore = create((set) => ({
     fetchProducts: async () => {
         set((state) => ({ loading: state.loading = true }))
         try {
-            const res = await fetch("/v1/products")
+            const res = await fetch(`${API_BASE}/api/v1/products`)
             
             const data = await res.json()
             
@@ -51,7 +53,7 @@ export const useProductStore = create((set) => ({
     },
     deleteProduct: async (id) => {
         try {
-            const res = await fetch(`/v1/products/${id}`, { method: "DELETE" })
+            const res = await fetch(`http://localhost:5000/api/v1/products/${id}`, { method: "DELETE" })
             const data = await res.json()
             if (data.success) {
                 set((state) => ({ 
@@ -65,7 +67,7 @@ export const useProductStore = create((set) => ({
     },
     updateProduct: async (id, updatedFields) => {
         try {
-            const res = await fetch(`/v1/products/${id}`, {
+            const res = await fetch(`http://localhost:5000/api/v1/products/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
