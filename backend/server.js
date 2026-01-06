@@ -12,7 +12,6 @@ app.use(express.json())
 app.use(cors());
 app.use("/api/v1/products", productRouter)
 
-const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.resolve()
 
 if (process.env.NODE_ENV === "production") {

@@ -36,8 +36,8 @@ const ProductCard = ({ product, response, setResponse }) => {
       shadow="lg"
       rounded="lg"
       overflow="hidden"
-      transition="all 0.3s"
-      _hover={{ transform: 'scale(1.025)', shadow: 'xl' }}
+      // transition="all 0.3s"
+      // _hover={{ transform: 'scale(1.025)', shadow: 'xl' }}
       bg={useColorModeValue('gray.200', 'gray.800')}
     >
       <Image
@@ -46,6 +46,8 @@ const ProductCard = ({ product, response, setResponse }) => {
         h={40}
         w="full"
         objectFit="cover"
+        transition="all 0.3s"
+        _hover={{ transform: 'scale(1.1)', shadow: 'xl' }}
       />
 
       <Box p={4}>
