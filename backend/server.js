@@ -17,10 +17,9 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 if (process.env.NODE_ENV === "production") {
-    const frontendPath = path.join(__dirname, "/frontend/dist")
-    app.use(express.static(frontendPath))
+    app.use(express.static(path.join(__dirname, "/frontend/dist")))
     app.get(/^\/(?!api).*/, (req, res) => {
-        res.sendFile(path.join(frontendPath, "index.html"))
+        res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"))
     })
 }
 
