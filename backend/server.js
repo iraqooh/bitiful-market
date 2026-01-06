@@ -1,6 +1,7 @@
 import express from "express"
 import dotenv from "dotenv"
 import path from "path"
+import { fileURLToPath } from "url"
 import { connectDB } from "./config/db.js"
 import productRouter from "./routes/product.routes.js"
 
@@ -10,11 +11,14 @@ const app = express()
 app.use(express.json())
 app.use("/api/v1/products", productRouter)
 
+const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.resolve()
+
 if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.join(__dirname, "/frontend/dist")))
-    app.get(/.*/, (req, res) => {
-        res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"))
+    const frontendPath = path.join(__dirname, "/frontend/dist")
+    app.use(express.static(frontendPath))
+    app.get(/^\/(?!api).*/, (req, res) => {
+        res.sendFile(path.join(frontendPath, "index.html"))
     })
 }
 
