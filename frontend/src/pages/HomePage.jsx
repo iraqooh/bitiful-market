@@ -1,18 +1,20 @@
 import ProductCard from '../components/ProductCard'
 import { useProductStore } from '../store/product'
-import { Alert, CloseButton, Container, SimpleGrid, Text, VStack } from '@chakra-ui/react'
+import { Alert, CloseButton, Container, SimpleGrid, Spinner, Text, VStack } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const HomePage = () => {
-  const { fetchProducts, products } = useProductStore()
+  const { fetchProducts, products, loading, fetchStatus } = useProductStore()
   const [response, setResponse] = useState(null)
   
   useEffect(() => {
     fetchProducts()
   }, [fetchProducts])
+
   return (
-    <Container maxW={"container.xl"} py={12}>
+    <Container maxW={"1170px"} py={12}>
+        {fetchStatus === 500 ? <Text textAlign={'center'}>Bitiful server is offline 🤖</Text> :
         <VStack spaceY={8}>
             <Text
                 fontSize={30}
@@ -20,14 +22,14 @@ const HomePage = () => {
                 bgGradient={"linear(to-r, cyan.400, blue.500)"}
                 textAlign={"center"}
             >
-                All Products 🚀 
+                All Products 
             </Text>
-            {products.length === 0 && <Text fontSize={'xl'} textAlign={'center'} fontWeight={'bold'}>
+            {loading ? <Spinner /> : products.length === 0 && <Text fontSize={'xl'} textAlign={'center'} fontWeight={'bold'}>
                 No products available 😢 {" "}
                 <Link to={"/create"}>
                     <Text as={"span"} shadow={'2xl'} shadowColor={'lime'}
                         _hover={{ textDecoration: 'underline' }}
-                        color={'cyan.300'}
+                        color={'blue.500'}
                     >
                         Create a product
                     </Text>
@@ -57,7 +59,8 @@ const HomePage = () => {
                     md: 2,
                     lg: 3
                 }}
-                spaceX={10} spaceY={10}
+                gap={10}
+                alignItems={"start"}
                 w={'full'}
             >
                 {products.map((product) => (
@@ -70,6 +73,7 @@ const HomePage = () => {
                 ))}
             </SimpleGrid>
         </VStack>
+    }
     </Container>
   )
 }
